@@ -1,22 +1,22 @@
-# Dust Density Measurement with LCD Display
+# LCD 디스플레이를 통한 미세먼지 농도 측정
 
-This project uses an Arduino, a dust sensor (such as the GP2Y1010AU0F), and an I2C-enabled LCD to measure and display the dust density in the air. The dust sensor provides an analog voltage that corresponds to the dust level, and the data is shown on the LCD screen.
+이 프로젝트는 Arduino, 미세먼지 센서 (예: GP2Y1010AU0F), 그리고 I2C 지원 LCD를 사용하여 공기 중 미세먼지 농도를 측정하고 LCD 화면에 표시하는 시스템입니다. 미세먼지 센서는 아날로그 전압을 출력하며, 이 값을 LCD 화면에 표시합니다.
 
-## Components Required
+## 필요 부품
 
-- Arduino board (e.g., Arduino Uno)
-- Dust sensor (e.g., GP2Y1010AU0F)
-- I2C-enabled LCD (16x2)
-- Jumper wires
-- Breadboard (optional)
+- Arduino 보드 (예: Arduino Uno)
+- 미세먼지 센서 (예: GP2Y1010AU0F)
+- I2C 지원 LCD (16x2)
+- 점퍼 와이어
+- 브레드보드 (선택사항)
 
-## Wiring Diagram
+## 연결 다이어그램
 
-1. **Dust Sensor (GP2Y1010AU0F)**:
+1. **미세먼지 센서 (GP2Y1010AU0F)**:
    - **VCC**: 5V
    - **GND**: GND
-   - **Vo (Analog Output)**: Connect to A0 (Arduino Analog Pin)
-   - **LED (Control Pin)**: Connect to Digital Pin 7 (Arduino)
+   - **Vo (아날로그 출력)**: A0 (Arduino 아날로그 핀)
+   - **LED (제어 핀)**: 디지털 핀 7 (Arduino)
 
 2. **I2C LCD**:
    - **VCC**: 5V
@@ -24,30 +24,30 @@ This project uses an Arduino, a dust sensor (such as the GP2Y1010AU0F), and an I
    - **SDA**: A4 (Arduino)
    - **SCL**: A5 (Arduino)
 
-## Libraries Required
+## 필요한 라이브러리
 
-The following libraries are needed for the project to run:
+프로젝트 실행을 위해 다음 라이브러리가 필요합니다:
 
-- **Wire.h**: This library is required for communication between the Arduino and the I2C LCD.
-- **LiquidCrystal_I2C.h**: This library allows the Arduino to interface with the I2C-enabled LCD.
+- **Wire.h**: Arduino와 I2C LCD 간의 통신을 위한 라이브러리입니다.
+- **LiquidCrystal_I2C.h**: Arduino가 I2C 지원 LCD와 상호작용할 수 있도록 해주는 라이브러리입니다.
 
-To install the libraries:
+라이브러리를 설치하려면:
 
-1. Open Arduino IDE
-2. Go to **Sketch** -> **Include Library** -> **Manage Libraries**
-3. Search for `LiquidCrystal_I2C` and `Wire`, then install them.
+1. Arduino IDE를 엽니다.
+2. **스케치** -> **라이브러리 포함하기** -> **라이브러리 관리**를 클릭합니다.
+3. `LiquidCrystal_I2C`와 `Wire`를 검색한 후 설치합니다.
 
-## Code Explanation
+## 코드 설명
 
-### Setup
-- The LCD is initialized and a welcome message is displayed for 2 seconds.
-- The dust sensor’s LED control pin (Pin 7) is set as an output.
-- The analog input pin (A0) is used to read the sensor's output voltage.
+### 초기화
+- LCD를 초기화하고 2초 동안 환영 메시지를 표시합니다.
+- 미세먼지 센서의 LED 제어 핀 (핀 7)을 출력으로 설정합니다.
+- 아날로그 입력 핀 (A0)을 사용하여 센서의 출력을 읽습니다.
 
-### Loop
-- The LED on the dust sensor is turned off for 280 microseconds to stabilize.
-- The analog value from the sensor is read and then converted to a voltage.
-- The dust density is calculated based on the formula:
+### 루프
+- 센서의 LED를 280마이크로초 동안 끄고 안정화시킵니다.
+- 센서에서 아날로그 값을 읽고 이를 전압으로 변환합니다.
+- 미세먼지 농도는 다음 공식으로 계산됩니다:
   ```cpp
   dustDensity = (Voltage - 0.5) / 0.005;
 
